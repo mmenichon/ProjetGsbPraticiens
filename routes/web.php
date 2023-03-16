@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VisiteurController;
-use App\Http\Controllers\FraisController;
+use App\Http\Controllers\PraticienController;
+use App\Http\Controllers\SpecialiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,13 @@ Route::get('/getLogin', [VisiteurController::class, 'getLogin']);
 Route::post('/login', [VisiteurController::class, 'signIn']);
 Route::get('/getLogout', [VisiteurController::class, 'signOut']);
 
-Route::get('/getListeFrais', [FraisController::class, 'getFraisVisiteur']);
+Route::get('/getListeFrais', [PraticienController::class, 'getListePraticiens']);
 
-Route::get('/modifierFrais/{id}', [FraisController::class, 'updateFrais']);
+Route::get('/listerSpecialites/{id}', [SpecialiteController::class, 'getListeSpecialite']);
+
+
+
+
 Route::post('/validerFrais',
     [
         'as' => 'validerFrais',
