@@ -8,15 +8,16 @@ use Illuminate\Support\Facades\Session;
 
 class SpecialiteController
 {
-    public function getListeSpecialite() {
+    public function getListeSpecialite($idPraticien) {
         try {
             $monErreur = Session::get('monErreur');
             Session::forget('monErreur');
             $unServiceSpecialite = new ServiceSpecialite();
             $id_visiteur = Session::get('id');
-            $mesSpecialites = $unServiceSpecialite->getSpecialites();
-            return view('vues/listeFrais', compact('mesSpecialites', 'monErreur'));
-        } catch (MonException $e){
+            $mesSpecialites = $unServiceSpecialite->getSpecialites($idPraticien);
+            return view('vues/listeSpecialites', compact('mesSpecialites', 'monErreur'));
+        }
+        catch (MonException $e){
             $monErreur = $e->getMessage();
             return view('vues\error', compact('monErreur'));
         } catch (Exception $e) {

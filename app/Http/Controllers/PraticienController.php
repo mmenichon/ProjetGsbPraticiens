@@ -13,7 +13,7 @@ class PraticienController
             $monErreur = Session::get('monErreur');
             Session::forget('monErreur');
             $unServicePraticien = new ServicePraticien();
-            $id_visiteur = Session::get('id');
+//            $id_visiteur = Session::get('id');
             $mesPraticiens = $unServicePraticien->getPraticiens();
             return view('vues/listePraticiens', compact('mesPraticiens', 'monErreur'));
         } catch (MonException $e){
