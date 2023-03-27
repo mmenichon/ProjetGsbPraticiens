@@ -18,14 +18,14 @@ class VisiteurController extends Controller
      */
     public function getLogin() {
         try {
-            $erreur = "";
-            return view('vues/formLogin', compact('erreur'));
+            $monErreur = "";
+            return view('vues/formLogin', compact('monErreur'));
         } catch (MonException $e){
             $monErreur = $e->getMessage();
-            return view('vues\formLogin', compact('erreur'));
+            return view('vues\formLogin', compact('monErreur'));
         } catch (Exception $e) {
             $monErreur = $e->getMessage();
-            return view('vues\formLogin', compact('erreur'));
+            return view('vues\formLogin', compact('monErreur'));
         }
     }
 
@@ -47,12 +47,12 @@ class VisiteurController extends Controller
                     return view('home');
                 }
             } else {
-                $erreur = "Login ou mot de passe inconnu";
-                return view('vues/formLogin', compact('erreur'));
+                $monErreur = "Login ou mot de passe inconnu";
+                return view('vues/formLogin', compact('monErreur'));
             }
         } catch (Exception $e) {
             $monErreur = $e->getMessage();
-            return view('vues/formLogin', compact('erreur'));
+            return view('vues/formLogin', compact('monErreur'));
         }
     }
 

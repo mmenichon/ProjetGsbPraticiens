@@ -14,7 +14,7 @@ class SpecialiteController
             Session::forget('monErreur');
             $unServiceSpecialite = new ServiceSpecialite();
             $id_visiteur = Session::get('id');
-            $mesSpecialites = $unServiceSpecialite->getSpecialites($idPraticien);
+            $mesSpecialites = $unServiceSpecialite->getSpecialitesPraticiens($idPraticien);
             return view('vues/listeSpecialites', compact('mesSpecialites', 'monErreur'));
         }
         catch (MonException $e){

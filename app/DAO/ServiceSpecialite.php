@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class ServiceSpecialite
 {
-    public function getSpecialites($idPraticien) {
+    public function getSpecialitesPraticiens($idPraticien) {
         try {
             $lesSpecialites = DB::table('posseder')
                 -> select('posseder.id_specialite', 'lib_specialite')
@@ -22,7 +22,15 @@ class ServiceSpecialite
         }
     }
 
-
+    public function deleteSpecialite($id_frais) {
+        try {
+            DB::table('posseder')
+                ->where('id_frais', '=', $id_frais)
+                ->delete();
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
 
 //    public function updateSpecialite($id_specialite) {
 //        try {
@@ -35,13 +43,6 @@ class ServiceSpecialite
 //        }
 //    }
 //
-//    public function deleteSpecialite($id_frais) {
-//        try {
-//            DB::table('fraishorsforfait')->where('id_frais', '=', $id_frais)->delete();
-//            DB::table('frais')->where('id_frais', '=', $id_frais)->delete();
-//        } catch (QueryException $e) {
-//            throw new MonException($e->getMessage(), 5);
-//        }
-//    }
+
 
 }
