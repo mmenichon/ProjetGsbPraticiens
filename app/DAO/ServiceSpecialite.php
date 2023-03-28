@@ -5,6 +5,7 @@ namespace App\DAO;
 use App\Exceptions\MonException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ServiceSpecialite
 {
@@ -22,11 +23,23 @@ class ServiceSpecialite
         }
     }
 
-    public function deleteSpecialite($id_frais) {
+    public function getListSpecialites() {
+        try {
+            $lesSpecialites = DB::table('specialite')
+                -> select('id_specialite', 'lib_specialite')
+                -> get();
+            return $lesSpecialites;
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
+    public function deleteSpecialite($id_spe) {
         try {
             DB::table('posseder')
-                ->where('id_frais', '=', $id_frais)
-                ->delete();
+                -> where('id_specialite', '=', $id_spe)
+                -> where('id_praticien', Session::get('id_praticien'))
+                -> delete();
         } catch (QueryException $e) {
             throw new MonException($e->getMessage(), 5);
         }

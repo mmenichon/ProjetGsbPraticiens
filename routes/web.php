@@ -24,19 +24,19 @@ Route::get('/getLogin', [VisiteurController::class, 'getLogin']);
 Route::post('/login', [VisiteurController::class, 'signIn']);
 Route::get('/getLogout', [VisiteurController::class, 'signOut']);
 
-Route::get('/getListeFrais', [PraticienController::class, 'getListePraticiens']);
+Route::get('/listePraticiens', [PraticienController::class, 'getListePraticiens']);
 
 Route::get('/listerSpecialites/{id}', [SpecialiteController::class, 'getListeSpecialite']);
 
+Route::get('/deleteSpecialite/{id}', [SpecialiteController::class, 'getSupprSpecialite']);
 
 
+//Route::post('/validerFrais',
+//    [
+//        'as' => 'validerFrais',
+//        'uses' => 'App\Http\Controllers\FraisController@validateFrais'
+//    ]);
+//
+//Route::get('/ajouterFrais', [FraisController::class, 'addFrais']);
+//
 
-Route::post('/validerFrais',
-    [
-        'as' => 'validerFrais',
-        'uses' => 'App\Http\Controllers\FraisController@validateFrais'
-    ]);
-
-Route::get('/ajouterFrais', [FraisController::class, 'addFrais']);
-
-Route::get('/supprimerFrais/{id}', [FraisController::class, 'supprimerFrais']);
