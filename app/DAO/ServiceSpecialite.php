@@ -47,6 +47,18 @@ class ServiceSpecialite
         }
     }
 
+    public function getAddSpecialite($idPraticien, $idSpecialite) {
+        try {
+            DB::table('posseder')
+                -> insert(['id_praticien' => $idPraticien,
+                    'id_specialite' => $idSpecialite,
+                    'diplome' => 'test',
+                    'coef_prescription' => 8.7]);
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
 //    public function updateSpecialite($id_specialite) {
 //        try {
 //            $dateJour = date("Y-m-d");

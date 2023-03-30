@@ -30,6 +30,7 @@ Route::get('/specialitesPraticien/{id}', [SpecialiteController::class, 'listeSpe
 
 Route::get('/deleteSpecialite/{id}', [SpecialiteController::class, 'deleteSpecialite']);
 
+Route::get('/addSpecialite', [SpecialiteController::class, 'addSpecialite']);
 
 //Route::post('/validerFrais',
 //    [
