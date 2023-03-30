@@ -20,7 +20,7 @@
                 <td> {{ $unPraticien->nom_praticien }} </td>
                 <td> {{ $unPraticien->prenom_praticien }} </td>
                 <td style="text-align:center">
-                    <a href="{{ url('/listerSpecialites') }}/{{ $unPraticien->id_praticien }}">
+                    <a href="{{ url('/specialitesPraticien') }}/{{ $unPraticien->id_praticien }}">
                         <span class="glyphicon glyphicon-list" data-toggle="tooltip" data-placement="top" title="Spécialités"></span>
                     </a>
                 </td>

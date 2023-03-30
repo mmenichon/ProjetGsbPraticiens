@@ -16,7 +16,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar+ bvn"></span>
                         </button>
-                        <a class="navbar-brand" href="">GSB Frais</a>
+                        <a class="navbar-brand" href="{{ url('/') }}">GSB Frais</a>
                     </div>
 
                     @if(\Illuminate\Support\Facades\Session::get('id') == 0)

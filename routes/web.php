@@ -24,11 +24,11 @@ Route::get('/getLogin', [VisiteurController::class, 'getLogin']);
 Route::post('/login', [VisiteurController::class, 'signIn']);
 Route::get('/getLogout', [VisiteurController::class, 'signOut']);
 
-Route::get('/listePraticiens', [PraticienController::class, 'getListePraticiens']);
+Route::get('/listePraticiens', [PraticienController::class, 'listePraticiens']);
 
-Route::get('/listerSpecialites/{id}', [SpecialiteController::class, 'getListeSpecialite']);
+Route::get('/specialitesPraticien/{id}', [SpecialiteController::class, 'listeSpecialitesParPraticien']);
 
-Route::get('/deleteSpecialite/{id}', [SpecialiteController::class, 'getSupprSpecialite']);
+Route::get('/deleteSpecialite/{id}', [SpecialiteController::class, 'deleteSpecialite']);
 
 
 //Route::post('/validerFrais',

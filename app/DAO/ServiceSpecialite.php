@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Session;
 
 class ServiceSpecialite
 {
-    // affihce la liste des spécialités par praticiens
-    public function getSpecialitesPraticiens($idPraticien) {
+    // affiche la liste des spécialités par praticien
+    public function getSpecialitesParPraticien($idPraticien) {
         try {
             $lesSpecialitesPraticiens = DB::table('posseder')
                 -> select('posseder.id_specialite', 'lib_specialite')
@@ -24,7 +24,8 @@ class ServiceSpecialite
         }
     }
 
-    public function getListSpecialites() {
+    // affiche la liste de toutes les spécialités
+    public function getSpecialites() {
         try {
             $lesSpecialites = DB::table('specialite')
                 -> select('id_specialite', 'lib_specialite')
@@ -35,7 +36,7 @@ class ServiceSpecialite
         }
     }
 
-    public function deleteSpecialite($id_spe) {
+    public function getDeleteSpecialite($id_spe) {
         try {
             DB::table('posseder')
                 -> where('id_specialite', '=', $id_spe)

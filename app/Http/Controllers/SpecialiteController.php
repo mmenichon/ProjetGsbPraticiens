@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Session;
 
 class SpecialiteController
 {
-    public function getListeSpecialite($idPraticien) {
+    public function listeSpecialitesParPraticien($idPraticien) {
         try {
             $monErreur = Session::get('monErreur');
             Session::forget('monErreur');
             $unServiceSpecialite = new ServiceSpecialite();
-            $mesSpecialites = $unServiceSpecialite->getSpecialitesPraticiens($idPraticien);
+            $mesSpecialites = $unServiceSpecialite->getSpecialitesParPraticien($idPraticien);
             // récupération de l'ID du praticien
             Session::put('id_praticien', $idPraticien);
             return view('vues/listeSpecialites', compact('mesSpecialites', 'monErreur'));
@@ -27,13 +27,13 @@ class SpecialiteController
         }
     }
 
-    public function getSupprSpecialite($idSpe) {
+    public function deleteSpecialite($idSpe) {
         try {
             $monErreur = Session::get('monErreur');
             Session::forget('monErreur');
             $unServiceSpecialite = new ServiceSpecialite();
-            $unServiceSpecialite->deleteSpecialite($idSpe);
-            $mesSpecialites = $unServiceSpecialite->getSpecialitesPraticiens(Session::get('id_praticien'));
+            $unServiceSpecialite->getDeleteSpecialite($idSpe);
+            $mesSpecialites = $unServiceSpecialite->getSpecialitesParPraticien(Session::get('id_praticien'));
 
             return view('vues/listeSpecialites', compact('mesSpecialites', 'monErreur'));
         } catch (MonException $e){

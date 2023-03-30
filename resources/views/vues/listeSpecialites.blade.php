@@ -20,14 +20,14 @@
                         <td> {{ $uneSpecialite->lib_specialite }} </td>
 
                         <td style="text-align:center">
-                            <a href="{{ url('/modifierSpecialite') }}/{{ $uneSpecialite->id_specialite }}">
+                            <a href="{{ url('/updateSpecialite') }}/{{ $uneSpecialite->id_specialite }}">
                                 <span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Modifier"></span>
                             </a>
                         </td>
 
                         <td style="text-align:center">
                             <a class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Supprimer" href="#"
-                               onclick="javascript:if (confirm('Suppression confirmée ?'))
+                               onclick="javascript:if (confirm('Voulez-vous vraiment supprimer ?'))
                                { window.location = '{{ url('/deleteSpecialite') }}/{{ $uneSpecialite->id_specialite }}' }">
                             </a>
                         </td>
