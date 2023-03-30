@@ -52,7 +52,7 @@ class SpecialiteController
             $unServiceSpecialite = new ServiceSpecialite();
             $idPraticien = Session::get('id_praticien');
             $unServiceSpecialite->getAddSpecialite($idPraticien, $idSpecialite);
-            return view('/');
+            return view('vues/');
         } catch (MonException $e){
             $monErreur = $e->getMessage();
             return view('vues\error', compact('monErreur'));
