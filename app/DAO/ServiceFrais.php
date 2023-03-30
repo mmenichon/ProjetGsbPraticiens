@@ -60,7 +60,9 @@ class ServiceFrais
 
     public function deleteFrais($id_frais) {
         try {
-            DB::table('fraishorsforfait')->where('id_frais', '=', $id_frais)->delete();
+            DB::table('fraishorsforfait')
+                ->where('id_frais', '=', $id_frais)
+                ->delete();
             DB::table('frais')->where('id_frais', '=', $id_frais)->delete();
         } catch (QueryException $e) {
             throw new MonException($e->getMessage(), 5);

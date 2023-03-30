@@ -9,15 +9,16 @@ use Illuminate\Support\Facades\Session;
 
 class ServiceSpecialite
 {
+    // affihce la liste des spécialités par praticiens
     public function getSpecialitesPraticiens($idPraticien) {
         try {
-            $lesSpecialites = DB::table('posseder')
+            $lesSpecialitesPraticiens = DB::table('posseder')
                 -> select('posseder.id_specialite', 'lib_specialite')
                 -> join('specialite', 'specialite.id_specialite', '=', 'posseder.id_specialite')
                 -> join('praticien', 'praticien.id_praticien', '=', 'posseder.id_praticien')
                 -> where('posseder.id_praticien', '=', $idPraticien)
                 -> get();
-            return $lesSpecialites;
+            return $lesSpecialitesPraticiens;
         } catch (QueryException $e) {
             throw new MonException($e->getMessage(), 5);
         }

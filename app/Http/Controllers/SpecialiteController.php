@@ -14,6 +14,7 @@ class SpecialiteController
             Session::forget('monErreur');
             $unServiceSpecialite = new ServiceSpecialite();
             $mesSpecialites = $unServiceSpecialite->getSpecialitesPraticiens($idPraticien);
+            // récupération de l'ID du praticien
             Session::put('id_praticien', $idPraticien);
             return view('vues/listeSpecialites', compact('mesSpecialites', 'monErreur'));
         }
@@ -32,9 +33,9 @@ class SpecialiteController
             Session::forget('monErreur');
             $unServiceSpecialite = new ServiceSpecialite();
             $unServiceSpecialite->deleteSpecialite($idSpe);
-            $listeSpecialite = $unServiceSpecialite->getListSpecialites();
+            $mesSpecialites = $unServiceSpecialite->getSpecialitesPraticiens(Session::get('id_praticien'));
 
-            return view('vues/listeSpecialites', compact('listeSpecialite', 'monErreur'));
+            return view('vues/listeSpecialites', compact('mesSpecialites', 'monErreur'));
         } catch (MonException $e){
             $monErreur = $e->getMessage();
             return view('vues\error', compact('monErreur'));
