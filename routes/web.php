@@ -30,14 +30,14 @@ Route::get('/specialitesPraticien/{id}', [SpecialiteController::class, 'listeSpe
 
 Route::get('/deleteSpecialite/{id}', [SpecialiteController::class, 'deleteSpecialite']);
 
-Route::get('/addSpecialite', [SpecialiteController::class, 'addSpecialite']);
+Route::post('/addSpecialite', [
+    'as' => 'addSpecialite',
+    'uses' => 'App\Http\Controllers\SpecialiteController@addSpecialite' ]);
 
 //Route::post('/validerFrais',
 //    [
 //        'as' => 'validerFrais',
 //        'uses' => 'App\Http\Controllers\FraisController@validateFrais'
 //    ]);
-//
-//Route::get('/ajouterFrais', [FraisController::class, 'addFrais']);
 //
 

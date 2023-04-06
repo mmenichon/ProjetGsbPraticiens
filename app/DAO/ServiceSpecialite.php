@@ -25,21 +25,40 @@ class ServiceSpecialite
     }
 
     // affiche la liste de toutes les spécialités
-    public function getSpecialites() {
+    public function getSpecialites($idSpecialite) {
         try {
+            $id_praticien = Session::get('id_praticien');
             $lesSpecialites = DB::table('specialite')
-                -> select('id_specialite', 'lib_specialite')
+                -> whereNotExists(function ($query) use ($id_praticien) {
+                    $query
+                        -> select(DB::raw(1))
+                        -> from('posseder')
+                        -> whereRaw('specialite.id_specialite = posseder.id_specialite')
+                        -> where('posseder.id_specialite', '=', $id_praticien);
+                })
                 -> get();
+            Session::put('id_specialite', $idSpecialite);
             return $lesSpecialites;
         } catch (QueryException $e) {
             throw new MonException($e->getMessage(), 5);
         }
     }
 
-    public function getDeleteSpecialite($id_spe) {
+//    public function getSpecialites() {
+//        try {
+//            $lesSpecialites = DB::table('specialite')
+//                -> select('id_specialite', 'lib_specialite')
+//                -> get();
+//            return $lesSpecialites;
+//        } catch (QueryException $e) {
+//            throw new MonException($e->getMessage(), 5);
+//        }
+//    }
+
+    public function getDeleteSpecialite($idSpecialite) {
         try {
             DB::table('posseder')
-                -> where('id_specialite', '=', $id_spe)
+                -> where('id_specialite', '=', $idSpecialite)
                 -> where('id_praticien', Session::get('id_praticien'))
                 -> delete();
         } catch (QueryException $e) {

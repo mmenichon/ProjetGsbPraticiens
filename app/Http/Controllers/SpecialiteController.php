@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DAO\ServiceSpecialite;
 use App\Exceptions\MonException;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
 class SpecialiteController
@@ -14,7 +15,7 @@ class SpecialiteController
             Session::forget('monErreur');
             $unServiceSpecialite = new ServiceSpecialite();
             $mesSpecialites = $unServiceSpecialite->getSpecialitesParPraticien($idPraticien);
-            $lesSpecialites = $unServiceSpecialite->getSpecialites();
+            $lesSpecialites = $unServiceSpecialite->getSpecialites($idPraticien);
             // récupération de l'ID du praticien
             Session::put('id_praticien', $idPraticien);
             return view('vues/listeSpecialites', compact('mesSpecialites', 'lesSpecialites', 'monErreur'));
@@ -46,14 +47,15 @@ class SpecialiteController
         }
     }
 
-    public function addSpecialite($idSpecialite) {
+    public function addSpecialite() {
         try {
             $monErreur = Session::get('monErreur');
             Session::forget('monErreur');
             $unServiceSpecialite = new ServiceSpecialite();
             $idPraticien = Session::get('id_praticien');
+            $idSpecialite = Request::input('id_specialite');
             $unServiceSpecialite->getAddSpecialite($idPraticien, $idSpecialite);
-            return view('vues/');
+            return redirect('/listeSpecialites');
         } catch (MonException $e){
             $monErreur = $e->getMessage();
             return view('vues\error', compact('monErreur'));
