@@ -27,17 +27,23 @@
 
                         <td style="text-align:center">
                             <a class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="top" title="Supprimer" href="#"
-                               onclick="javascript:if (confirm('Voulez-vous vraiment supprimer ?'))
+                               onclick="if (confirm('Voulez-vous vraiment supprimer ?'))
                                { window.location = '{{ url('/deleteSpecialite') }}/{{ $uneSpecialite->id_specialite }}' }">
                             </a>
                         </td>
 
                     </tr>
                 @endforeach
-
-                @foreach()
-
             </table>
+
+            <div class="col-md-10">
+                <select class="form-control" name="cbGenres" required>
+                    <option value="0">Sélectionner une spécialité</option>
+                    @foreach ($lesSpecialites as $laSpecialite)
+                        <option value="{{ $laSpecialite->id_specialite }}">{{ $laSpecialite->lib_specialite }}</option>
+                    @endforeach
+                </select>
+            </div>
 
         </div>
     </div>
