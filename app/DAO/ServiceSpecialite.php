@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 class ServiceSpecialite
 {
     // affiche la liste des spécialités par praticien
-    public function getSpecialitesParPraticien($idPraticien) {
+    public function specialitesParPraticien($idPraticien) {
         try {
             $lesSpecialitesPraticiens = DB::table('posseder')
                 -> select('posseder.id_specialite', 'lib_specialite')
@@ -24,8 +24,8 @@ class ServiceSpecialite
         }
     }
 
-    // affiche la liste de toutes les spécialités
-    public function getSpecialites($idSpecialite) {
+    // Autres specialites
+    public function autresSpecialites($idSpecialite) {
         try {
             $id_praticien = Session::get('id_praticien');
             $lesSpecialites = DB::table('specialite')
@@ -37,14 +37,18 @@ class ServiceSpecialite
                         -> where('posseder.id_specialite', '=', $id_praticien);
                 })
                 -> get();
+
+            // récupération de l'ID de la spécialité
             Session::put('id_specialite', $idSpecialite);
+
             return $lesSpecialites;
         } catch (QueryException $e) {
             throw new MonException($e->getMessage(), 5);
         }
     }
 
-    public function getAllSpecialites() {
+    // liste de toutes les spécialités
+    public function allSpecialites() {
         try {
             $allSpecialites = DB::table('specialite')
                 -> select()
@@ -55,7 +59,7 @@ class ServiceSpecialite
         }
     }
 
-    public function getDeleteSpecialite($idSpecialite) {
+    public function deleteSpecialite($idSpecialite) {
         try {
             DB::table('posseder')
                 -> where('id_specialite', '=', $idSpecialite)
@@ -66,7 +70,7 @@ class ServiceSpecialite
         }
     }
 
-    public function getAddSpecialite($idPraticien, $idSpecialite) {
+    public function addSpecialite($idPraticien, $idSpecialite) {
         try {
             DB::table('posseder')
                 -> insert(['id_praticien' => $idPraticien,
@@ -78,15 +82,18 @@ class ServiceSpecialite
         }
     }
 
-//    public function updateSpecialite($id_specialite) {
-//        try {
-//            $dateJour = date("Y-m-d");
-//            DB::table('frais')
-//                ->where('id_frais', '=', $id_specialite)
-//                ->update(['anneemois' => $anneemois, 'nbjustificatifs' => $nbjustification, 'datemodification' => $dateJour]);
-//        } catch (QueryException $e) {
-//            throw new MonException($e->getMessage(), 5);
-//        }
-//    }
+    public function updateSpecialite($idPraticien, $idSpecialite) {
+        try {
+            $formerSpecialite = Session::get('id_specialite');
+            DB::table('posseder')
+                -> where('id_praticien', '=', $idPraticien)
+                -> where('id_specialite', '=', $formerSpecialite)
+                -> update([
+                    'id_specialite' => $idSpecialite
+                ]);
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
 
 }

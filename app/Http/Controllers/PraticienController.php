@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 
 class PraticienController
 {
-    public function listePraticiens() {
+    public function getListePraticiens() {
         try {
             $monErreur = Session::get('monErreur');
             Session::forget('monErreur');
@@ -17,10 +17,10 @@ class PraticienController
             return view('vues/listePraticiens', compact('mesPraticiens', 'monErreur'));
         } catch (MonException $e){
             $monErreur = $e->getMessage();
-            return view('vues\error', compact('monErreur'));
+            return view('vues/error', compact('monErreur'));
         } catch (Exception $e) {
             $monErreur = $e->getMessage();
-            return view('vues\error', compact('monErreur'));
+            return view('vues/error', compact('monErreur'));
         }
     }
 

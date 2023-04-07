@@ -39,7 +39,7 @@
             {!! Form::open(['url' => 'addSpecialite']) !!}
             <div class="col-md-10">
                 <select class="form-control" name="idSpecialite" required>
-                    <option value="0">Sélectionner une spécialité</option>
+                    <option value="0">Ajouter une spécialité</option>
                     @foreach ($lesSpecialites as $laSpecialite)
                         <option value="{{ $laSpecialite->id_specialite }}">{{ $laSpecialite->lib_specialite }}</option>
                     @endforeach

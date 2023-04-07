@@ -14,7 +14,6 @@ class VisiteurController extends Controller
 {
     /**
      * Initialise le formulaire d'authentification
-     * @return type vue formLogin
      */
     public function getLogin() {
         try {
@@ -31,7 +30,6 @@ class VisiteurController extends Controller
 
     /**
      * Authentifie le visiteur
-     * @return type vue formLogin
      */
     public function signIn() {
         try {
@@ -57,8 +55,7 @@ class VisiteurController extends Controller
     }
 
     /**
-     * Déconnecte le visiteur authentifié (p.10)
-     * @return type vue home
+     * Déconnecte le visiteur authentifié
      */
     public function signOut() {
         $unVisiteur = new ServiceVisiteur();

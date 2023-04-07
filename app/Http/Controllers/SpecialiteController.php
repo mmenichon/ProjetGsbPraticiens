@@ -9,16 +9,18 @@ use Illuminate\Support\Facades\Session;
 
 class SpecialiteController
 {
-    public function listeSpecialitesParPraticien($idPraticien) {
+    public function getListeSpecialitesParPraticien($idPraticien) {
         try {
             $monErreur = Session::get('monErreur');
             Session::forget('monErreur');
             $unServiceSpecialite = new ServiceSpecialite();
-            $mesSpecialites = $unServiceSpecialite->getSpecialitesParPraticien($idPraticien);
+            $mesSpecialites = $unServiceSpecialite->specialitesParPraticien($idPraticien);
             // appel de la liste de toutes les spécialités
-            $lesSpecialites = $unServiceSpecialite->getSpecialites($idPraticien);
+            $lesSpecialites = $unServiceSpecialite->autresSpecialites($idPraticien);
+
             // récupération de l'ID du praticien
             Session::put('id_praticien', $idPraticien);
+
             return view('vues/listeSpecialites', compact('mesSpecialites', 'lesSpecialites', 'monErreur'));
         }
         catch (MonException $e){
@@ -30,15 +32,15 @@ class SpecialiteController
         }
     }
 
-    public function deleteSpecialite($idSpe) {
+    public function getDeleteSpecialite($idSpe) {
         try {
             $monErreur = Session::get('monErreur');
             Session::forget('monErreur');
             $unServiceSpecialite = new ServiceSpecialite();
-            $unServiceSpecialite->getDeleteSpecialite($idSpe);
-            $mesSpecialites = $unServiceSpecialite->getSpecialitesParPraticien(Session::get('id_praticien'));
+            $unServiceSpecialite->deleteSpecialite($idSpe);
+            $mesSpecialites = $unServiceSpecialite->specialitesParPraticien(Session::get('id_praticien'));
 
-            $lesSpecialites = $unServiceSpecialite->getAllSpecialites();
+            $lesSpecialites = $unServiceSpecialite->allSpecialites();
             return view('vues/listeSpecialites', compact('mesSpecialites', 'lesSpecialites', 'monErreur'));
         } catch (MonException $e){
             $monErreur = $e->getMessage();
@@ -48,7 +50,6 @@ class SpecialiteController
             return view('vues/error', compact('monErreur'));
         }
     }
-
 
     public function postAddSpecialite() {
         try {
@@ -57,18 +58,49 @@ class SpecialiteController
             $idPraticien = Session::get('id_praticien');
             $idSpecialite = Request::input('idSpecialite');
             $unServiceSpecialite = new ServiceSpecialite();
-            $unServiceSpecialite->getAddSpecialite($idPraticien, $idSpecialite);
+            $unServiceSpecialite->addSpecialite($idPraticien, $idSpecialite);
 
-            $mesSpecialites = $unServiceSpecialite->getSpecialitesParPraticien($idPraticien);
-            $lesSpecialites = $unServiceSpecialite->getAllSpecialites();
+            $mesSpecialites = $unServiceSpecialite->specialitesParPraticien($idPraticien);
+            $lesSpecialites = $unServiceSpecialite->allSpecialites();
             return view('vues/listeSpecialites', compact('mesSpecialites', 'lesSpecialites', 'monErreur'));
         } catch (MonException $e){
             $monErreur = $e->getMessage();
-            return view('vues\error', compact('monErreur'));
+            return view('vues/error', compact('monErreur'));
         } catch (Exception $e) {
             $monErreur = $e->getMessage();
-            return view('vues\error', compact('monErreur'));
+            return view('vues/error', compact('monErreur'));
         }
     }
 
+    public function getUpdateSpecialite() {
+        try {
+            $monErreur = Session::get('monErreur');
+            Session::forget('monErreur');
+            $unServiceSpecialite = new ServiceSpecialite();
+            $lesSpecialites = $unServiceSpecialite->allSpecialites();
+
+            return view('vues/modifierSpecialite', compact('lesSpecialites', 'monErreur'));
+        } catch (MonException $e){
+            $monErreur = $e->getMessage();
+            return view('vues/error', compact('monErreur'));
+        } catch (Exception $e) {
+            $monErreur = $e->getMessage();
+            return view('vues/error', compact('monErreur'));
+        }
+    }
+
+    public function postUpdateSpecialite() {
+        try {
+            $monErreur = Session::get('monErreur');
+            Session::forget('monErreur');
+
+
+        } catch (MonException $e){
+            $monErreur = $e->getMessage();
+            return view('vues/error', compact('monErreur'));
+        } catch (Exception $e) {
+            $monErreur = $e->getMessage();
+            return view('vues/error', compact('monErreur'));
+        }
+    }
 }
