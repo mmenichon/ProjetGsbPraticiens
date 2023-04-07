@@ -23,3 +23,5 @@ Route::get('/deleteSpecialite/{id}', [SpecialiteController::class, 'getDeleteSpe
 Route::post('/addSpecialite', [SpecialiteController::class, 'postAddSpecialite']);
 
 Route::get('/updateSpecialite/{id}', [SpecialiteController::class, 'getUpdateSpecialite']);
+
+Route::post('/updateSpecialite', [SpecialiteController::class, 'postUpdateSpecialite']);

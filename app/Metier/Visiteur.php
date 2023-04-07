@@ -23,4 +23,3 @@ class Visiteur extends Model {
         'type_visiteur'
     ];
 }
-?>

@@ -27,14 +27,14 @@ class ServiceSpecialite
     // Autres specialites
     public function autresSpecialites($idSpecialite) {
         try {
-            $id_praticien = Session::get('id_praticien');
+            $idPraticien = Session::get('id_praticien');
             $lesSpecialites = DB::table('specialite')
-                -> whereNotExists(function ($query) use ($id_praticien) {
+                -> whereNotExists(function ($query) use ($idPraticien) {
                     $query
                         -> select(DB::raw(1))
                         -> from('posseder')
                         -> whereRaw('specialite.id_specialite = posseder.id_specialite')
-                        -> where('posseder.id_specialite', '=', $id_praticien);
+                        -> where('posseder.id_praticien', '=', $idPraticien);
                 })
                 -> get();
 

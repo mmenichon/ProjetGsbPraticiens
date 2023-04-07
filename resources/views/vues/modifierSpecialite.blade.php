@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+    {!! Form::open(['url' => 'updateSpecialite']) !!}
     <div class="container">
         <div class="col-md-5">
             <div class="blanc">
@@ -24,4 +25,5 @@
 
         </div>
     </div>
+    {!! Form::close() !!}
 @stop
