@@ -9,7 +9,7 @@
 
             <div class="col-md-10">
                 <select class="form-control" name="idSpecialite" required>
-                    <option value="0">Selectionner une spécialité</option>
+                    <option value="0">Modifier une spécialité</option>
                     @foreach ($lesSpecialites as $laSpecialite)
                         <option value="{{ $laSpecialite->id_specialite }}">{{ $laSpecialite->lib_specialite }}</option>
                     @endforeach
