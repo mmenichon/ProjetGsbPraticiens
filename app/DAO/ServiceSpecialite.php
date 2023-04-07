@@ -44,16 +44,16 @@ class ServiceSpecialite
         }
     }
 
-//    public function getSpecialites() {
-//        try {
-//            $lesSpecialites = DB::table('specialite')
-//                -> select('id_specialite', 'lib_specialite')
-//                -> get();
-//            return $lesSpecialites;
-//        } catch (QueryException $e) {
-//            throw new MonException($e->getMessage(), 5);
-//        }
-//    }
+    public function getAllSpecialites() {
+        try {
+            $allSpecialites = DB::table('specialite')
+                -> select()
+                -> get();
+            return $allSpecialites;
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
 
     public function getDeleteSpecialite($idSpecialite) {
         try {

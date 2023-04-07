@@ -15,6 +15,7 @@ class SpecialiteController
             Session::forget('monErreur');
             $unServiceSpecialite = new ServiceSpecialite();
             $mesSpecialites = $unServiceSpecialite->getSpecialitesParPraticien($idPraticien);
+            // appel de la liste de toutes les spécialités
             $lesSpecialites = $unServiceSpecialite->getSpecialites($idPraticien);
             // récupération de l'ID du praticien
             Session::put('id_praticien', $idPraticien);
@@ -37,7 +38,8 @@ class SpecialiteController
             $unServiceSpecialite->getDeleteSpecialite($idSpe);
             $mesSpecialites = $unServiceSpecialite->getSpecialitesParPraticien(Session::get('id_praticien'));
 
-            return view('vues/listeSpecialites', compact('mesSpecialites', 'monErreur'));
+            $lesSpecialites = $unServiceSpecialite->getAllSpecialites();
+            return view('vues/listeSpecialites', compact('mesSpecialites', 'lesSpecialites', 'monErreur'));
         } catch (MonException $e){
             $monErreur = $e->getMessage();
             return view('vues/error', compact('monErreur'));
@@ -47,15 +49,19 @@ class SpecialiteController
         }
     }
 
-    public function addSpecialite() {
+
+    public function postAddSpecialite() {
         try {
             $monErreur = Session::get('monErreur');
             Session::forget('monErreur');
-            $unServiceSpecialite = new ServiceSpecialite();
             $idPraticien = Session::get('id_praticien');
-            $idSpecialite = Request::input('id_specialite');
+            $idSpecialite = Request::input('idSpecialite');
+            $unServiceSpecialite = new ServiceSpecialite();
             $unServiceSpecialite->getAddSpecialite($idPraticien, $idSpecialite);
-            return redirect('/listeSpecialites');
+
+            $mesSpecialites = $unServiceSpecialite->getSpecialitesParPraticien($idPraticien);
+            $lesSpecialites = $unServiceSpecialite->getAllSpecialites();
+            return view('vues/listeSpecialites', compact('mesSpecialites', 'lesSpecialites', 'monErreur'));
         } catch (MonException $e){
             $monErreur = $e->getMessage();
             return view('vues\error', compact('monErreur'));
