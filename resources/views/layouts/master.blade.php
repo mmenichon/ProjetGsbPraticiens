@@ -19,19 +19,27 @@
                         <a class="navbar-brand" href="{{ url('/') }}">GSB Praticiens</a>
                     </div>
 
-                    @if(\Illuminate\Support\Facades\Session::get('id') == 0)
+                    @if(Session::get('id') == 0)
                     <div class="collapse navbar-collapse" id="navbar-collapse-target">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{ url('/getLogin') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Se connecter</a></li>
                         </ul>
                     </div>
                     @endif
-                    @if(\Illuminate\Support\Facades\Session::get('id') > 0)
+                    @if(Session::get('id') > 0)
                     <div class="collapse navbar-collapse" id="navbar-collapse-target">
                         <ul class="nav navbar-nav">
                             <li><a href="{{ url('/listePraticiens') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Lister</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li data-toggle="collapse" data-target=".navbar-collapse.in">
+                                {!! Form::open(['url' => 'postSearch', 'files' => true]) !!}
+                                <label>
+                                    <input type="search" name="nom">
+                                </label>
+                                <input type="submit" name="button" value="Rechercher">
+                                {!! Form::close() !!}
+                            </li>
                             <li><a href="{{ url('/getLogout') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Se déconnecter</a></li>
                         </ul>
                     </div>

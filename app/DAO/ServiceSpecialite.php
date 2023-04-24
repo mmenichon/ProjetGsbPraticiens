@@ -96,4 +96,15 @@ class ServiceSpecialite
         }
     }
 
+    public function searchSpecialite($libelle) {
+        try {
+            $result = DB::table('specialite')
+                -> where('lib_specialite', 'LIKE', $libelle)
+                -> get();
+                return $result;
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
 }
