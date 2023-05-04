@@ -23,7 +23,7 @@ class ServicePraticien
     public function searchPraticien($nom) {
         try {
             $result = DB::table('praticien')
-                -> where('nom_praticien', 'LIKE', $nom)
+                -> where('nom_praticien', 'LIKE', $nom.'%')
                 -> get();
             return $result;
         } catch (QueryException $e) {
