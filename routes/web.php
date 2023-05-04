@@ -25,3 +25,9 @@ Route::post('/addSpecialite', [SpecialiteController::class, 'postAddSpecialite']
 Route::get('/updateSpecialite/{id}', [SpecialiteController::class, 'getUpdateSpecialite']);
 
 Route::post('/updateSpecialite', [SpecialiteController::class, 'postUpdateSpecialite']);
+
+Route::post('/postSearch',
+    [
+        'as' => 'postSearch',
+        'uses' => 'App\Http\Controllers\PraticienController@postSearch'
+    ]);
