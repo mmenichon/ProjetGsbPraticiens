@@ -5,6 +5,8 @@ use App\Http\Controllers\VisiteurController;
 use App\Http\Controllers\PraticienController;
 use App\Http\Controllers\SpecialiteController;
 
+use App\Http\Controllers\ActivityController;
+
 
 Route::get('/', function () {
     return view('home');
@@ -31,3 +33,8 @@ Route::post('/postSearch',
         'as' => 'postSearch',
         'uses' => 'App\Http\Controllers\PraticienController@postSearch'
     ]);
+
+
+Route::get('/listeActivitesCompl', [ActivityController::class, 'listeActivitesCompl']);
+Route::get('/activitesPraticien/{id}', [ActivityController::class, 'getListePraticienParActivites']);
+Route::get('/listePraticiensJamaisInvites', [ActivityController::class, 'listePraticiensJamaisInvites']);

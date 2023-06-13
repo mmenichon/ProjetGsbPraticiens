@@ -31,6 +31,14 @@
                         <ul class="nav navbar-nav">
                             <li><a href="{{ url('/listePraticiens') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Lister</a></li>
                         </ul>
+
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url('/listeActivitesCompl') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Activités Complémentaire</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li><a href="{{ url('/listePraticiensJamaisInvites') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Praticiens Jamais Invités</a></li>
+                        </ul>
+
                         <ul class="nav navbar-nav navbar-right">
                             <li data-toggle="collapse" data-target=".navbar-collapse.in">
                                 {!! Form::open(['url' => 'postSearch', 'files' => true]) !!}
